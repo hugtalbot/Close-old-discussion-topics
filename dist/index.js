@@ -9834,7 +9834,7 @@ async function getAllDiscussions(owner, repo) {
     const GITHUB_TOKEN = core.getInput('GITHUB_TOKEN');
     const octokit = github.getOctokit(GITHUB_TOKEN);
 
-    console.log('Get all discussions from owner (${owner}) and repo (${repo})')
+    console.log('Get all discussions from owner ('+owner+') and repo ('+repo+')')
 
     try {
         let discussions = [];
