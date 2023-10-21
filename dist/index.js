@@ -9836,14 +9836,14 @@ async function getAllDiscussions(owner, repo) {
 
     console.log('Get all discussions from owner ('+owner+') and repo ('+repo+')')
 
-    try {
+    //try {
         let discussions = [];
         let page = 1;
         let perPage = 30; // Adjust this number based on your needs
 
         while (true) {
             const response = await octokit.request(
-                'GET /repos/'+owner+'/'+repo+'/discussions',
+                'GET /repos/{owner}/{repo}/discussions',
                 {
                     owner,
                     repo,
@@ -9866,10 +9866,10 @@ async function getAllDiscussions(owner, repo) {
         }
 
         return discussions;
-    } catch (error) {
-        console.error('Error:', error.message);
-        return [];
-    }
+    //} catch (error) {
+    //    console.error('Error:', error.message);
+    //    return [];
+    //}
 }
 
 
