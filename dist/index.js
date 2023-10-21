@@ -9822,7 +9822,7 @@ async function processAllDiscussions() {
     console.log('Start processing all discussions')
     for (const discussion of discussions) {
         // Process each discussion here
-        console.log('  > Process discussion #${discussion}')
+        console.log('  > Process discussion #'+discussion)
         await processDiscussion(owner, repo, discussion);
     }
     console.log('End processing all discussions')
@@ -9843,7 +9843,7 @@ async function getAllDiscussions(owner, repo) {
 
         while (true) {
             const response = await octokit.request(
-                'GET /repos/{owner}/{repo}/discussions',
+                'GET /repos/'+owner+'/'+repo+'/discussions',
                 {
                     owner,
                     repo,
@@ -9911,7 +9911,7 @@ async function processDiscussion(owner, repo, discussionNumber) {
                     );
 
                     if (teamMembership.status === 200 && teamMembership.data.state === 'active') {
-                        console.log('Closing discussion #${discussion_number}');
+                        console.log('Closing discussion #'+discussion_number);
                         //await octokit.request(
                         //  'PATCH /repos/{owner}/{repo}/discussions/{discussion_number}',
                         //  {
@@ -9930,12 +9930,12 @@ async function processDiscussion(owner, repo, discussionNumber) {
                         //    owner,
                         //    repo,
                         //    discussion_number: discussionNumber,
-                        //    body: `@${topicAuthorLogin} your topic has been closed due inactivity.\n Feel free to reopen it with updates or to open any new topic`,              }
+                        //    body: `@'+topicAuthorLogin+' your topic has been closed due inactivity.\n Feel free to reopen it with updates or to open any new topic`,              }
                         //);
                     }
                 }
             } else {
-                console.log('No replies found in discussion #${discussion_number}');
+                console.log('No replies found in discussion #'+discussion_number);
             }
         } else {
             console.error('Error fetching discussion comments:', response.status);
