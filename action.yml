@@ -1,0 +1,20 @@
+name: 'Close old discussion topics'
+description: 'Automatically close discussion topics'
+author: 'Hugo Talbot'
+
+
+inputs:
+  GITHUB_TOKEN:
+    description: 'GitHub token used to octokit requests'
+    required: true
+  owner:
+    description: 'Owner account'
+    required: true
+  repository:
+    description: 'Repository name in the owner account'
+    required: true
+
+
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
