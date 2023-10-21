@@ -3,12 +3,15 @@ const github= require('@actions/github');
 
 
 async function processAllDiscussions(owner, repo) {
+    console.log('Start processing all discussions')
     const discussions = await getAllDiscussions(owner, repo);
 
     for (const discussion of discussions) {
         // Process each discussion here
+        console.log('  > Process discussion #${discussion}')
         await processDiscussion(owner, repo, discussion);
     }
+    console.log('End processing all discussions')
 }
 
 
