@@ -2,10 +2,14 @@ const core= require('@actions/core');
 const github= require('@actions/github');
 
 
-async function processAllDiscussions(owner, repo) {
-    console.log('Start processing all discussions')
+async function processAllDiscussions() {
+    const owner = core.getInput('owner');
+    const repo = core.getInput('repository');
+
+    console.log('Accessing all discussions')
     const discussions = await getAllDiscussions(owner, repo);
 
+    console.log('Start processing all discussions')
     for (const discussion of discussions) {
         // Process each discussion here
         console.log('  > Process discussion #${discussion}')
@@ -132,10 +136,4 @@ async function processDiscussion(owner, repo, discussionNumber) {
 }
 
 
-const owner = core.getInput('owner');
-const repo = core.getInput('repository');
-
-//const owner = 'sofa-framework';
-//const repo = 'sofa';
-
-processAllDiscussions(owner, repo);
+processAllDiscussions();
