@@ -9812,10 +9812,14 @@ const core= __nccwpck_require__(2186);
 const github= __nccwpck_require__(5438);
 
 
-async function processAllDiscussions(owner, repo) {
-    console.log('Start processing all discussions')
+async function processAllDiscussions() {
+    const owner = core.getInput('owner');
+    const repo = core.getInput('repository');
+
+    console.log('Accessing all discussions')
     const discussions = await getAllDiscussions(owner, repo);
 
+    console.log('Start processing all discussions')
     for (const discussion of discussions) {
         // Process each discussion here
         console.log('  > Process discussion #${discussion}')
@@ -9829,6 +9833,8 @@ async function getAllDiscussions(owner, repo) {
 
     const GITHUB_TOKEN = core.getInput('GITHUB_TOKEN');
     const octokit = github.getOctokit(GITHUB_TOKEN);
+
+    console.log('Get all discussions from owner (${owner}) and repo (${repo})')
 
     try {
         let discussions = [];
@@ -9940,13 +9946,7 @@ async function processDiscussion(owner, repo, discussionNumber) {
 }
 
 
-const owner = core.getInput('owner');
-const repo = core.getInput('repository');
-
-//const owner = 'sofa-framework';
-//const repo = 'sofa';
-
-processAllDiscussions(owner, repo);
+processAllDiscussions();
 })();
 
 module.exports = __webpack_exports__;
